@@ -8,14 +8,14 @@ const VideoPlayer: React.FC = () => {
       <h2 className="text-2xl font-bold text-blue-600 mb-4">
         Video Tutorials with Sign Language Interpreters
       </h2>
-      <div className="aspect-video">
+      {/* <div className="aspect-video">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=0FcwzMq4iWg" // Replace with your video URL
           controls
           width="100%"
           height="100%"
         />
-      </div>
+      </div> */}
       <p className="text-gray-700 mt-4">
         Learn through video lessons accompanied by professional sign language interpreters.
       </p>

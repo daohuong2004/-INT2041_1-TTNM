@@ -30,9 +30,9 @@ function Landing(props: IProps) {
       transition={{ duration: 0.7, delay: 0.1 }}
       className="w-full bg-indigo-700 p-2 shadow-lg fixed top-0 ml-0 z-10"
     >
-      <div className="container mx-auto flex justify-between items-center mr-60">
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6">
         
-        <Link to="/" className="text-white text-2xl font-bold flex items-center ml-5 gap-2">
+        <Link to="/" className="text-white text-3xl font-bold flex items-center gap-2">
           <img className="w-10 object-cover" src={'/assets/logo.png'} alt="Sign Language" />
           <span className="text-yellow-300">SignPal</span>
         </Link>
@@ -104,7 +104,7 @@ function Landing(props: IProps) {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-5xl font-bold leading-tight mb-6"
               >
-                Learn and Translate Languages — For Everyone.
+                Learn and Translate Languages for Everyone.
               </motion.h1>
               
               <motion.p 
@@ -260,7 +260,7 @@ function Landing(props: IProps) {
                   </div>
                   <h2 className="text-2xl font-bold text-indigo-800 mb-4">Disability Support</h2>
                   <p className="text-gray-600 mb-6">
-                    Visual learning tools, sign language integration, and captions to make learning accessible and engaging.
+                    Video learning tools, sign language integration, and captions to make learning accessible and engaging.
                   </p>
                   <ul className="text-left text-gray-600 mb-8 space-y-2">
                     <li className="flex items-center">
@@ -279,7 +279,7 @@ function Landing(props: IProps) {
                       <span className="bg-green-100 p-1 rounded-full mr-2">
                         <Gamepad size={14} className="text-green-600" />
                       </span>
-                      Sign Language Game
+                      Sign language games
                     </li>
                   </ul>
                   

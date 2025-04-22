@@ -4,7 +4,7 @@ import { Calendar as BigCalendar, dateFnsLocalizer, Event as RBCEvent, SlotInfo 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale";
-
+import { useEffect } from "react";
 // Set up the localizer for date-fns
 const localizer = dateFnsLocalizer({
   format,
@@ -24,6 +24,26 @@ interface CalendarEvent extends Omit<RBCEvent, "title"> {
 const CalendarPage: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  // Load events from localStorage on mount
+  useEffect(() => {
+    const savedEvents = localStorage.getItem("calendarEvents");
+    if (savedEvents) {
+     const parsed = JSON.parse(savedEvents);
+    setEvents(
+      parsed.map((event: CalendarEvent) => ({
+        ...event,
+        start: new Date(event.start),
+        end: new Date(event.end),
+      }))
+    );
+  }
+}, []);
+
+// Save events to localStorage on every update
+  useEffect(() => {
+    localStorage.setItem("calendarEvents", JSON.stringify(events));
+}, [events]);
+
   const [editEventId, setEditEventId] = useState<number | null>(null);
   const [editText, setEditText] = useState<string>("");
   const [showAddModal, setShowAddModal] = useState<boolean>(false);

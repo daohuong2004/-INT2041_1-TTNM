@@ -32,7 +32,7 @@ const PlanYourDay: React.FC = () => {
               {/* Enhanced Subheading */}
               <p className="text-xl text-gray-600 mb-1 max-w-3xl mx-auto leading-relaxed">
                 Stay on top of your learning with our Kanban board and calendar tools.
-                Track assignments, classes, and important events tailored for Deaf students.
+                
               </p>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -41,8 +42,21 @@ const KanbanBoard: React.FC = () => {
       { id: "task3", content: "Attend live video lesson" },
       { id: "task4", content: "Work on visual learning project" }
     ],
-    completed: [{ id: "task5", content: "Complete vocabulary quiz" }]
+    completed: [{ id: "task5", content: "Complete vocabulary video" }]
   });
+  // Load tasks from localStorage on mount
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("kanbanTasks");
+    if (savedTasks) {
+        setTasks(JSON.parse(savedTasks));
+     }
+  }, []);
+
+// Save tasks to localStorage on every update
+  useEffect(() => {
+    localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
+  }, [tasks]);
+
 
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -99,6 +113,7 @@ const KanbanBoard: React.FC = () => {
       bgColor: "bg-emerald-50",
       borderColor: "border-emerald-200"
     }
+    
   };
 
   return (
@@ -143,6 +158,7 @@ const KanbanBoard: React.FC = () => {
                               className={`bg-white rounded-lg shadow-sm border ${config.borderColor} 
                                 p-4 transition-all duration-200 hover:shadow-md
                                 ${snapshot.isDragging ? "shadow-lg ring-2 ring-gray-200" : ""}`}
+                              
                             >
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3">
