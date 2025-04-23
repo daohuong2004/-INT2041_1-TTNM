@@ -180,7 +180,7 @@ function Dictionary(props: IProps) {
   return (
     <Layout>
         <div>
-          <h1 className="text-5xl font-extrabold mb-6 text-[#1F618D]">Dictionary</h1>
+          <h1 className="text-5xl font-extrabold mb-6 text-blue-600">Dictionary</h1>
           <hr className="mb-6 border-gray-300" />
           <p className="mb-4 text-lg">Easily look up words and phrases in sign language.</p>
           <p className="mb-4 text-lg">View corresponding videos that show the signs for searched terms.</p>

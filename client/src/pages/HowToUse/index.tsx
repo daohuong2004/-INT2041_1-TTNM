@@ -19,26 +19,51 @@ const Feature: React.FC<FeatureProps> = ({
   iconUrl,
   isSelected,
   onClick,
-}) => (
-  <div
-    className={`bg-white rounded-lg shadow-xl p-6 flex flex-col items-center justify-center w-[500px] h-[244px] cursor-pointer transition-all duration-300 ease-in-out transform hover:bg-gradient-to-t hover:from-[#48C9B0] hover:to-[#1F618D] 
-      ${
-      isSelected ? "scale-105 shadow-xl" : "hover:scale-105 hover:shadow-lg"
-    }`}
-    onClick={onClick}
-  >
-    {!isSelected ? (
-      <>
-        <img src={iconUrl} alt={title} className="w-16 h-16 mb-4" />
-        <h2 className="text-xl font-semibold text-center">{title}</h2>
-      </>
-    ) : (
-      <div className="text-gray-800 text-sm">{content}</div>
-    )}
-  </div>
-);
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className={`bg-white rounded-lg p-6 flex flex-col items-center justify-center w-[400px] h-[244px] cursor-pointer transition-all duration-300 ease-in-out transform 
+        ${
+          isHovered || isSelected
+            ? "scale-105 shadow-xl bg-gradient-to-t from-[#48C9B0] to-[#1F618D]"
+            : "hover:scale-105 hover:shadow-lg"
+        }`}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {isHovered || isSelected ? (
+        <div className="text-white text-sm">{content}</div>
+      ) : (
+        <>
+          <img src={iconUrl} alt={title} className="w-16 h-16 mb-4" />
+          <h2 className="text-xl font-semibold text-center">{title}</h2>
+        </>
+      )}
+    </div>
+  );
+};
 
 const features = [
+  {
+    title: "Video Learning",
+    content: (
+      <>
+        <p className="mb-2">Easily look up sign language video</p>
+        <ul className="list-disc list-inside mb-2">
+          <li>- Type your video that you want to search in the search bar.</li>
+          <li>- Watch videos to learn more abour sign language.</li>
+        </ul>
+        <p>
+          <strong>Track Your Progress:</strong> Watch videos and improve your knowledge.
+        </p>
+      </>
+    ),
+    iconUrl: "/assets/video.png",
+  },
+  
   {
     title: "Dictionary",
     content: (
@@ -62,9 +87,10 @@ const features = [
       <>
         <p className="mb-2">A fun way to practice sign language recognition:</p>
         <ul className="list-disc list-inside mb-2">
-          <li>- Watch the sign language video displayed on the screen.</li>
-          <li>- Choose the correct answer from the options below the video.</li>
-          <li>- Check your answer, and move on to the next challenge.</li>
+          <li>- <strong>Sign Game</strong>: use hand signs corresponding to the target alphabet letters in sign language.</li>
+          <li>- <strong>Video Game</strong>: watch the sign language video displayed on the screen and choose the correct answer.</li>
+          
+          
         </ul>
         <p>
           <strong>Track Your Progress:</strong> Use the game to test and improve your knowledge.
@@ -98,6 +124,23 @@ const features = [
     ),
     iconUrl: "https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_g_translate_48px-512.png",
   },
+  {
+    title: "Plan Your Day",
+    content: (
+      <>
+        <p className="mb-2">Easily plan your day in the kabanboard and calender</p>
+        <ul className="list-disc list-inside mb-2">
+          <li>- Drop, drag or delete tasks in the "To Do", "In Progress","Complete" columns.</li>
+          <li>- Add events to the calender.</li>
+        
+        </ul>
+        <p>
+          <strong>Track your progress: </strong> Plan your day, make goals, and stay on top of your tasks
+        </p>
+      </>
+    ),
+    iconUrl: "/assets/calender.png",
+  },
 
   {
     title: "About Us",
@@ -115,10 +158,10 @@ function HowToUse(props: IProps) {
   return (
     <Layout>
       <div>
-        <h1 className="text-5xl font-extrabold mb-6 text-[#1F618D]">How to use</h1>
+        <h1 className="text-5xl font-extrabold mb-6 text-blue-600">How to use</h1>
         <hr className="mb-6 border-gray-300" />
         <p className="mb-12 text-lg">
-          Welcome to our app! Here's a  <span className="text-[#48C9B0]">step-by-step </span>guide to help you make the most of its features:
+          Welcome to our app! Here's a  <span className="text-blue-600">step-by-step </span>guide to help you make the most of its features:
         </p>
         <div className="container mx-auto flex flex-wrap justify-center gap-10">
           {features.map((feature, index) => (

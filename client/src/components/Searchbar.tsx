@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface SearchBarProps {
   query: string;
@@ -16,6 +16,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSuggestionClick,
 }) => {
   const suggestionRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -23,11 +25,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
         suggestionRef.current &&
         !suggestionRef.current.contains(event.target as Node)
       ) {
-        // Clear input using a synthetic input event
         const syntheticEvent = {
           target: { value: "" },
         } as React.ChangeEvent<HTMLInputElement>;
         onInputChange(syntheticEvent); // Clear input
+        setHighlightedIndex(-1);
       }
     };
 
@@ -37,13 +39,35 @@ const SearchBar: React.FC<SearchBarProps> = ({
     };
   }, [onInputChange]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (suggestions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHighlightedIndex((prev) =>
+        prev < suggestions.length - 1 ? prev + 1 : 0
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHighlightedIndex((prev) =>
+        prev > 0 ? prev - 1 : suggestions.length - 1
+      );
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      e.preventDefault();
+      onSuggestionClick(suggestions[highlightedIndex]);
+    } else {
+      onKeyPress(e); // Trigger search on Enter if nothing highlighted
+    }
+  };
+
   return (
     <div className="relative">
       <input
+        ref={inputRef}
         type="text"
         value={query}
         onChange={onInputChange}
-        onKeyUp={onKeyPress}
+        onKeyDown={handleKeyDown}
         className="w-full py-3 pl-12 pr-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out"
         placeholder="Search for a word..."
       />
@@ -56,13 +80,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
       {suggestions.length > 0 && (
         <div
           ref={suggestionRef}
-          className="mt-2 bg-white border border-gray-300 rounded-lg shadow-lg max-h-[300px] overflow-y-auto"
+          className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-[300px] overflow-y-auto z-50"
         >
           <ul>
             {suggestions.map((result, index) => (
               <li
                 key={index}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition duration-200"
+                className={`px-4 py-2 cursor-pointer transition duration-200 ${
+                  index === highlightedIndex
+                    ? "bg-blue-100 text-blue-700 font-semibold"
+                    : "hover:bg-gray-100"
+                }`}
                 onClick={() => onSuggestionClick(result)}
               >
                 {result}

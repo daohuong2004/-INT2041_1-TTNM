@@ -164,8 +164,8 @@ function Translator(props: IProps) {
 
 	return (
 		<Layout>
-			<div className="mx-auto max-w-5xl rounded-lg bg-white">
-				<h1 className="text-5xl font-extrabold mb-6 text-[#1F618D]">Translator</h1>
+			<div className=" rounded-lg bg-white">
+				<h1 className="text-5xl font-extrabold mb-6 text-blue-600">Translator</h1>
 				<hr className="mb-6 border-gray-300" />
 				<p className="mb-4 text-lg">
 					<span className="text-[#48C9B0] font-bold">Text to Sign Language</span> : Converts written text into accurate sign

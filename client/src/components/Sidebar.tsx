@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Home,
-  BarChart2,
   Clipboard,
-  Eye,
+  Video,
   Award,
-  Users,
-  Settings,
-  UserCircle,
   ChevronDown,
   ChevronUp,
   ChevronLeft,
   ChevronRight,
   Calendar,
   Users as UsersIcon,
+  User2Icon,
+  Signal,
+  UserCheck2Icon,
 } from "lucide-react";
+import SignLanguageDetector from "model";
 <img src="/assets/logo.png" alt="logo" />
 
 
@@ -54,7 +54,7 @@ const Sidebar: React.FC = () => {
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
             <Home size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Home</span>}
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Home</span>}
           </Link>
         </li>
         <li>
@@ -63,7 +63,7 @@ const Sidebar: React.FC = () => {
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
             <UsersIcon size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">How To Use</span>}
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">How To Use</span>}
           </Link>
         </li>
         <li>
@@ -71,8 +71,8 @@ const Sidebar: React.FC = () => {
             to="/videolearning"
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
-            <UsersIcon size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Video Learning</span>}
+            <Video size={18} />
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Video Learning</span>}
           </Link>
         </li>
         <li>
@@ -80,8 +80,8 @@ const Sidebar: React.FC = () => {
             to="/dictionary"
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
-            <UsersIcon size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Dictionary</span>}
+            <Clipboard size={18} />
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Dictionary</span>}
           </Link>
         </li>
         <li>
@@ -89,8 +89,8 @@ const Sidebar: React.FC = () => {
             to="/translate"
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
-            <Clipboard size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Sign Language</span>}
+            <UserCheck2Icon size={18} />
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Sign Language</span>}
           </Link>
         </li>
         
@@ -101,7 +101,7 @@ const Sidebar: React.FC = () => {
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300 w-full text-left"
           >
             <Award size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Game</span>}
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Game</span>}
             {isGamificationOpen ? (
               <ChevronUp size={18} />
             ) : (
@@ -116,7 +116,7 @@ const Sidebar: React.FC = () => {
                   to="/Signgame"
                   className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
                 >
-                  {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Sign Game</span>}
+                  {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Sign Game</span>}
                 </Link>
               </li>
               <li>
@@ -124,7 +124,7 @@ const Sidebar: React.FC = () => {
                   to="/Videogame"
                   className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
                 >
-                  {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Video Game</span>}
+                  {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Video Game</span>}
                 </Link>
               </li>
               
@@ -142,7 +142,7 @@ const Sidebar: React.FC = () => {
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
             <Calendar size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">Plan Your Day</span>}
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">Plan Your Day</span>}
           </Link>
         </li>
         <li>
@@ -150,8 +150,8 @@ const Sidebar: React.FC = () => {
             to="/about-us"
             className="group text-white flex items-center gap-2 transition duration-300 px-6 py-2 hover:text-yellow-300"
           >
-            <Eye size={18} />
-            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition">About Us</span>}
+            <UsersIcon size={18} />
+            {isSidebarOpen && <span className="group-hover:text-yellow-300 transition text-lg">About Us</span>}
           </Link>
         </li>
 

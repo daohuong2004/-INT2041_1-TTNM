@@ -58,7 +58,7 @@ const PlanYourDay: React.FC = () => {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
                   <FaCalendarAlt className="inline-block mr-2 text-green-500" />
-                  Plan Your Classes and Events
+                  Plan Your Events
                 </h2>
                 <button className="text-white hover:text-gray-300 bg-green-500 p-1 rounded-2xl font-medium transition duration-300">
                   Manage Calendar

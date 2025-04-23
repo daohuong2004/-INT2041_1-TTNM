@@ -15,14 +15,27 @@ interface VideoLessonType {
 }
 
 
-
 export default function VideoLearning() {
+  
   const [activeTab, setActiveTab] = useState<string>("video-lessons"); // Tabs for navigation
-  const [showPremiumBanner, setShowPremiumBanner] = useState<boolean>(true); // Control premium banner visibility
   const [videoLessons, setVideoLessons] = useState<VideoLessonType[]>([]); // State for YouTube videos
   const [loading, setLoading] = useState<boolean>(true); // Loading state for API call
   const [searchQuery, setSearchQuery] = useState<string>("sign language tutorial"); // Search query state
   const [searchInput, setSearchInput] = useState<string>(""); // User input for search
+  function useDebounce(value: string, delay: number) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(() => {
+      const handler = setTimeout(() => setDebouncedValue(value), delay);
+      return () => clearTimeout(handler);
+    }, [value, delay]);
+    return debouncedValue;
+  }
+  
+  // Trong component:
+  
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  
+  const debouncedInput = useDebounce(searchInput, 300);
 
   // YouTube API Key
   const API_KEY = "AIzaSyCTXMbVAAFr8muCvl77GUjIdzRB7f8qdBE"; 
@@ -59,6 +72,34 @@ export default function VideoLearning() {
     e.preventDefault();
     setSearchQuery(searchInput); // Update search query state
   };
+  
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (!debouncedInput.trim()) {
+        setSuggestions([]);
+        return;
+      }
+      try {
+        const response = await axios.get(
+          `https://suggestqueries.google.com/complete/search`,
+          {
+            params: {
+              client: "youtube",
+              ds: "yt",
+              q: debouncedInput,
+            },
+          }
+        );
+        const data = response.data[1].map((item: any) => item[0]);
+        setSuggestions(data);
+      } catch (err) {
+        console.error("Error fetching suggestions", err);
+      }
+    };
+  
+    fetchSuggestions();
+  }, [debouncedInput]);
+  
 
  
 
@@ -69,10 +110,10 @@ export default function VideoLearning() {
 
       {/* Sidebar */}
       {/* Main Content */}
-      <div className="flex-1 ml-0 p-6 mt-2 bg-white">
+      <div className="flex-1 ml-0 p-0 mt-0 bg-white">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-600">Video Learning Tools</h1>
+          <h1 className="text-5xl font-extrabold mb-6 text-blue-600">Video Learning Tools</h1>
         </div>
 
         {/* Search Bar */}
@@ -138,4 +179,5 @@ export default function VideoLearning() {
     </Layout>
   );
 }
+
 

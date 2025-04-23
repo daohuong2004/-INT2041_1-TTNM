@@ -56,7 +56,7 @@ function Aboutus(props: IProps) {
   return (
     <Layout>
       <div>
-        <h1 className="text-5xl font-extrabold mb-6 text-[#1F618D]">
+        <h1 className="text-5xl font-extrabold mb-6 text-blue-600">
           About Us
         </h1>
         <hr className="mb-6 border-[#1F618D]" />
