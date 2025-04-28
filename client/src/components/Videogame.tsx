@@ -132,7 +132,7 @@ function Game() {
   return (
     <Layout>
       <div>
-        <h1 className="text-5xl font-extrabold mb-6 text-[#1F618D]">Guess the Sign Game</h1>
+        <h1 className="text-5xl font-extrabold mb-6 text-blue-600">Guess the Sign Game</h1>
         <hr className="mb-6 border-gray-300" />
         <p className="mb-4 text-lg">
           Watch the sign language video carefully and try to guess the correct word that is being expressed in the video.

@@ -82,7 +82,7 @@ const features = [
     iconUrl: "https://cdn3.iconfinder.com/data/icons/font-awesome-solid/512/book-512.png",
   },
   {
-    title: "Guess the Sign Game",
+    title: "Games",
     content: (
       <>
         <p className="mb-2">A fun way to practice sign language recognition:</p>
