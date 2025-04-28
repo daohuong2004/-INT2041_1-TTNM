@@ -121,7 +121,7 @@ function Game() {
       setMessage(
         <span>
           Incorrect! The correct answer is:{" "}
-          <span className="text-green-500">{selectedGloss?.gloss}</span>. ❌
+          <span className="text-green-500">{selectedGloss?.gloss}</span>.
         </span>
       );
       console.log("Answer is incorrect. Correct answer:", selectedGloss?.gloss); 
@@ -141,84 +141,92 @@ function Game() {
           After watching the video, select one of the options below that you believe corresponds to the word shown in the video.
         </p>
         <hr className="mb-6 border-gray-300" />
-        {/* Display video */}
-        {currentVideo ? (
-          <div className="mb-6 flex justify-center">
-            <div className="relative w-full max-w-2xl p-4 bg-gray-100 rounded-lg shadow-lg">
-              <video
-                controls
-                src={currentVideo}
-                className="w-full h-auto rounded-lg transition-transform duration-300 hover:scale-105"
-              />
+        <section className="flex flex-wrap justify-between items-start w-full max-w-6xl mx-auto gap-8">
+          {/* Video section: occupies 3/5 of the width */}
+          <div className="flex-[3] w-full sm:w-[60%] p-4 bg-gray-100 rounded-lg shadow-lg mb-6">
+            {currentVideo ? (
+              <div className="relative w-full h-auto">
+                <video
+                  controls
+                  src={currentVideo}
+                  className="w-full h-auto rounded-lg transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            ) : (
+              <p className="text-center text-red-500 text-lg font-medium">No video found.</p>
+            )}
+          </div>
+  
+          {/* Options section: occupies 2/5 of the width */}
+          <div className="flex-[2] w-full sm:w-[38%] p-4 bg-gray-100 rounded-lg shadow-lg mb-6">
+            {/* Display options */}
+            <div className="grid grid-cols-2 gap-4 w-full max-w-md mx-auto mb-6">
+              {options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleOptionClick(option)}
+                  disabled={isAnswered}
+                  className={`p-3 text-lg font-semibold rounded shadow text-center transform transition-all duration-300 
+                    ${
+                      selectedOption === option
+                        ? "bg-blue-600 text-white scale-105"
+                        : "bg-gray-800 text-white hover:bg-gray-600 hover:scale-105"
+                    }
+                    ${
+                      message && option === selectedGloss?.gloss
+                        ? "bg-green-500 text-white scale-110"
+                        : message && option !== selectedGloss?.gloss && option === selectedOption
+                        ? "bg-red-500 text-white scale-95"
+                        : ""
+                    }`}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
+            
+            {/* Check answer and new question buttons */}
+            <div className="flex justify-center gap-6 mb-6">
+              <button
+                onClick={checkAnswer}
+                disabled={!selectedOption}
+                className={`p-2 w-40 text-lg font-semibold rounded-lg shadow-md transition-all duration-300 
+                  ${
+                    selectedOption
+                      ? "bg-green-600 hover:bg-green-500 text-white"
+                      : "bg-gray-400 text-gray-700 cursor-not-allowed"
+                  }`}
+              >
+                Check Answer
+              </button>
+              <button
+                onClick={pickNewVideo}
+                className="p-2 w-40 text-lg font-semibold rounded-lg shadow-md bg-yellow-600 hover:bg-yellow-500 text-white transition-all duration-300"
+              >
+                Another
+              </button>
+            </div>
+            {/* Display result message */}
+            {message && (
+              <div
+                className={`flex items-center justify-center gap-3 text-lg font-semibold mt-6 p-4 rounded-lg shadow-lg transition-all duration-500 
+                  ${
+                    message === "Correct! 🎉"
+                      ? "bg-green-100 text-green-800 border border-green-400"
+                      : "bg-red-100 text-red-800 border border-red-400"
+                  }`}
+              >
+                {message === "Correct! 🎉" && <span>✔️</span>}
+                {message !== "Correct! 🎉" && <span>❌</span>}
+                <p>{message}</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <p className="text-center text-red-500 text-lg font-medium">No video found.</p>
-        )}
-        {/* Display options */}
-        <div className="grid grid-cols-2 gap-4 w-full max-w-md mx-auto mb-6">
-          {options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleOptionClick(option)}
-              disabled={isAnswered}
-              className={`p-3 text-lg font-semibold rounded shadow text-center transform transition-all duration-300 
-                ${
-                  selectedOption === option
-                    ? "bg-blue-600 text-white scale-105"
-                    : "bg-gray-800 text-white hover:bg-gray-600 hover:scale-105"
-                }
-                ${
-                  message && option === selectedGloss?.gloss
-                    ? "bg-green-500 text-white scale-110"
-                    : message && option !== selectedGloss?.gloss && option === selectedOption
-                    ? "bg-red-500 text-white scale-95"
-                    : ""
-                }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        {/* Check answer and new question buttons */}
-        <div className="flex justify-center gap-6 mb-6">
-          <button
-            onClick={checkAnswer}
-            disabled={!selectedOption}
-            className={`p-2 w-40 text-lg font-semibold rounded-lg shadow-md transition-all duration-300 
-              ${
-                selectedOption
-                  ? "bg-green-600 hover:bg-green-500 text-white"
-                  : "bg-gray-400 text-gray-700 cursor-not-allowed"
-              }`}
-          >
-            Check Answer
-          </button>
-          <button
-            onClick={pickNewVideo}
-            className="p-2 w-40 text-lg font-semibold rounded-lg shadow-md bg-yellow-600 hover:bg-yellow-500 text-white transition-all duration-300"
-          >
-            Another
-          </button>
-        </div>
-        {/* Display result message */}
-        {message && (
-          <div
-            className={`flex items-center justify-center gap-3 text-lg font-semibold mt-6 p-4 rounded-lg shadow-lg transition-all duration-500 
-              ${
-                message === "Correct! 🎉"
-                  ? "bg-green-100 text-green-800 border border-green-400"
-                  : "bg-red-100 text-red-800 border border-red-400"
-              }`}
-          >
-            {message === "Correct! 🎉" && <span>✔️</span>}
-            {message !== "Correct! 🎉" && <span>❌</span>}
-            <p>{message}</p>
-          </div>
-        )}
+        </section>
       </div>
     </Layout>
   );
+  
 }
 
 export default Game;

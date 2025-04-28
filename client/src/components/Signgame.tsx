@@ -425,7 +425,7 @@ const SignLanguageGame: React.FC = () => {
               onClick={startGame}
               className="bg-cyan-600 text-white px-6 py-3 rounded-lg hover:bg-cyan-500 transition duration-300"
             >
-              Let's Play a Game
+              Let's Play
             </button>
           </div>
         )}
