@@ -20,7 +20,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 model = tf.keras.models.load_model('test.h5')
 actions = []
-with open("C:/Users/Admin/Sign-language-translator/server/data/words.txt","r") as file:
+with open("C:/Users/Thu Trang/Downloads/Sign-language-translator/server/data/words.txt", "r") as file:
     actions = [line.strip() for line in file if line.strip()]
 
 @app.route('/predict', methods=['POST'])
@@ -127,7 +127,7 @@ def translate_text():
     src_language = data.get('src')
     dest_language = data.get('dest')
     if src_language is None:
-        src_language = translator.detect(text=text)
+        src_language = translator.detect(text=text).lang
     language = LANGUAGES.get(src_language, "Unknown language").capitalize()
     if dest_language not in LANGUAGES or src_language not in LANGUAGES:
         return jsonify({"error": "Invalid language code"}), 400
