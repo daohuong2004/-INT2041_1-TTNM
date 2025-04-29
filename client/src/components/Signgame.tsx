@@ -31,122 +31,123 @@ const SignLanguageGame: React.FC = () => {
     const randomLetter = letters[Math.floor(Math.random() * letters.length)];
     setTargetLetter(randomLetter);
   };
-
-  // Initialize the game
+  
+  // Khi game bắt đầu thì random chữ
   useEffect(() => {
     if (isGameActive) {
       generateRandomLetter();
+      setTimeLeft(10); // reset luôn thời gian khi bắt đầu
     }
   }, [isGameActive]);
-
+  
   // Timer logic
   useEffect(() => {
     if (!isGameActive || timeLeft === 0) {
       setIsGameActive(false); // End the game
       return;
     }
-
+  
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
-
+  
     return () => clearInterval(timer);
   }, [timeLeft, isGameActive]);
-
-  // Check if the detected letter matches the target letter
+  
+  // Check nếu user tạo đúng dấu tay
   useEffect(() => {
     if (detectedLetter === targetLetter && isGameActive) {
       setScore((prevScore) => prevScore + 1);
-      generateRandomLetter(); // Generate a new letter
-      setTimeLeft(10); // Reset the timer
+      generateRandomLetter();
+      setTimeLeft(10); // Reset lại thời gian
     }
   }, [detectedLetter, targetLetter, isGameActive]);
-
+  
   // Hand detection logic
   useEffect(() => {
     if (!videoRef.current || !isGameActive) {
       return;
     }
-
+  
     const hands = new Hands({
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
-
+  
     hands.setOptions({
       maxNumHands: 1,
       modelComplexity: 1,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
     });
-
+  
     hands.onResults((results: Results) => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          // Clear the canvas
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-          // Draw hand landmarks
-          if (results.multiHandLandmarks) {
-            for (const landmarks of results.multiHandLandmarks) {
-              drawLandmarks(ctx, landmarks);
-              const letter = detectSignLanguageLetter(landmarks);
-              setDetectedLetter(letter);
-            }
-          }
+      if (!canvasRef.current || !isGameActive) return; // canvas mất hoặc game kết thúc thì bỏ
+      const ctx = canvasRef.current.getContext("2d");
+      if (!ctx) return;
+  
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  
+      if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+          drawLandmarks(ctx, landmarks);
+          const letter = detectSignLanguageLetter(landmarks);
+          setDetectedLetter(letter);
         }
       }
     });
-    
-
-    // Initialize the camera
+  
     const camera = new Camera(videoRef.current!, {
       onFrame: async () => {
-        await hands.send({ image: videoRef.current! });
+        if (videoRef.current) {
+          await hands.send({ image: videoRef.current });
+        }
       },
-      width: 320, // Smaller window size
+      width: 320,
       height: 240,
     });
-
+  
     camera.start();
-
-    // Cleanup
+  
+    // Cleanup khi component unmount hoặc game dừng
     return () => {
       camera.stop();
+      hands.close?.(); // Nếu Hands có hàm close thì gọi luôn
     };
   }, [isGameActive]);
-
-  // Function to draw hand landmarks on the canvas
+  
+  // Vẽ tay
   const drawLandmarks = (ctx: CanvasRenderingContext2D, landmarks: any): void => {
+    if (!canvasRef.current) return;
+  
+    const width = canvasRef.current.width;
+    const height = canvasRef.current.height;
+  
     ctx.fillStyle = "#FF0000";
     for (const landmark of landmarks) {
       ctx.beginPath();
-      ctx.arc(landmark.x * canvasRef.current!.width, landmark.y * canvasRef.current!.height, 5, 0, 2 * Math.PI);
+      ctx.arc(landmark.x * width, landmark.y * height, 5, 0, 2 * Math.PI);
       ctx.fill();
     }
-
-    // Draw connections between landmarks
+  
     ctx.strokeStyle = "#00FF00";
     ctx.lineWidth = 2;
     for (const [start, end] of HAND_CONNECTIONS) {
       ctx.beginPath();
-      ctx.moveTo(landmarks[start].x * canvasRef.current!.width, landmarks[start].y * canvasRef.current!.height);
-      ctx.lineTo(landmarks[end].x * canvasRef.current!.width, landmarks[end].y * canvasRef.current!.height);
+      ctx.moveTo(landmarks[start].x * width, landmarks[start].y * height);
+      ctx.lineTo(landmarks[end].x * width, landmarks[end].y * height);
       ctx.stroke();
     }
   };
-
-  // Function to detect sign language letters based on hand landmarks
+  
+  // Detect chữ tay
   const detectSignLanguageLetter = (landmarks: any): string => {
-    const thumbTip = landmarks[4]; // Thumb tip
-    const indexTip = landmarks[8]; // Index finger tip
-    const middleTip = landmarks[12]; // Middle finger tip
-    const ringTip = landmarks[16]; // Ring finger tip
-    const pinkyTip = landmarks[20]; // Pinky finger tip
-
-    // Helper function to calculate distance between two points
-    const distance = (point1: { x: number; y: number; }, point2: { x: number; y: number; }) =>
+    const thumbTip = landmarks[4];
+    const indexTip = landmarks[8];
+    const middleTip = landmarks[12];
+    const ringTip = landmarks[16];
+    const pinkyTip = landmarks[20];
+  
+    const distance = (point1: { x: number; y: number }, point2: { x: number; y: number }) =>
       Math.hypot(point1.x - point2.x, point1.y - point2.y);
 
     // Letter "A": Thumb extended, other fingers closed

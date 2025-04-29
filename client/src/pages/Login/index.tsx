@@ -53,7 +53,7 @@ function Login(props: IProps) {
                 </div>
                 <input
                   type="email"
-                  placeholder="john.doe@gmail.com"
+                  placeholder="nguyenthuha@gmail.com"
                   className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]" 
                 />
               </div>
