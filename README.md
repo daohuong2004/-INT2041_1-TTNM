@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> fe1dbf2 (fe)
 # README - Ứng dụng SignPal	
 
 ## Giới thiệu
@@ -23,9 +19,7 @@
 - Tạo nền tảng học ngôn ngữ ký hiệu thông qua từ điển, game và các bài học tương tác.
 
 ## Hướng dẫn cài đặt và sử dụng
-<<<<<<< HEAD
-=======
-=======
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -107,7 +101,4 @@ here: [https://facebook.github.io/create-react-app/docs/deployment](https://face
 
 ### `npm run build` fails to minify
 
-This section has moved
-here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 3296b05 (Add client files)
->>>>>>> fe1dbf2 (fe)
+
