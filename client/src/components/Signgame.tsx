@@ -31,7 +31,7 @@ const SignLanguageGame: React.FC = () => {
     const randomLetter = letters[Math.floor(Math.random() * letters.length)];
     setTargetLetter(randomLetter);
   };
-  
+
   // Khi game bắt đầu thì random chữ
   useEffect(() => {
     if (isGameActive) {
@@ -39,21 +39,21 @@ const SignLanguageGame: React.FC = () => {
       setTimeLeft(10); // reset luôn thời gian khi bắt đầu
     }
   }, [isGameActive]);
-  
+
   // Timer logic
   useEffect(() => {
     if (!isGameActive || timeLeft === 0) {
       setIsGameActive(false); // End the game
       return;
     }
-  
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
-  
+
     return () => clearInterval(timer);
   }, [timeLeft, isGameActive]);
-  
+
   // Check nếu user tạo đúng dấu tay
   useEffect(() => {
     if (detectedLetter === targetLetter && isGameActive) {
@@ -62,31 +62,31 @@ const SignLanguageGame: React.FC = () => {
       setTimeLeft(10); // Reset lại thời gian
     }
   }, [detectedLetter, targetLetter, isGameActive]);
-  
+
   // Hand detection logic
   useEffect(() => {
     if (!videoRef.current || !isGameActive) {
       return;
     }
-  
+
     const hands = new Hands({
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
-  
+
     hands.setOptions({
       maxNumHands: 1,
       modelComplexity: 1,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
     });
-  
+
     hands.onResults((results: Results) => {
       if (!canvasRef.current || !isGameActive) return; // canvas mất hoặc game kết thúc thì bỏ
       const ctx = canvasRef.current.getContext("2d");
       if (!ctx) return;
-  
+
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-  
+
       if (results.multiHandLandmarks) {
         for (const landmarks of results.multiHandLandmarks) {
           drawLandmarks(ctx, landmarks);
@@ -95,7 +95,7 @@ const SignLanguageGame: React.FC = () => {
         }
       }
     });
-  
+
     const camera = new Camera(videoRef.current!, {
       onFrame: async () => {
         if (videoRef.current) {
@@ -105,30 +105,30 @@ const SignLanguageGame: React.FC = () => {
       width: 320,
       height: 240,
     });
-  
+
     camera.start();
-  
+
     // Cleanup khi component unmount hoặc game dừng
     return () => {
       camera.stop();
       hands.close?.(); // Nếu Hands có hàm close thì gọi luôn
     };
   }, [isGameActive]);
-  
+
   // Vẽ tay
   const drawLandmarks = (ctx: CanvasRenderingContext2D, landmarks: any): void => {
     if (!canvasRef.current) return;
-  
+
     const width = canvasRef.current.width;
     const height = canvasRef.current.height;
-  
+
     ctx.fillStyle = "#FF0000";
     for (const landmark of landmarks) {
       ctx.beginPath();
       ctx.arc(landmark.x * width, landmark.y * height, 5, 0, 2 * Math.PI);
       ctx.fill();
     }
-  
+
     ctx.strokeStyle = "#00FF00";
     ctx.lineWidth = 2;
     for (const [start, end] of HAND_CONNECTIONS) {
@@ -138,7 +138,7 @@ const SignLanguageGame: React.FC = () => {
       ctx.stroke();
     }
   };
-  
+
   // Detect chữ tay
   const detectSignLanguageLetter = (landmarks: any): string => {
     const thumbTip = landmarks[4];
@@ -146,7 +146,7 @@ const SignLanguageGame: React.FC = () => {
     const middleTip = landmarks[12];
     const ringTip = landmarks[16];
     const pinkyTip = landmarks[20];
-  
+
     const distance = (point1: { x: number; y: number }, point2: { x: number; y: number }) =>
       Math.hypot(point1.x - point2.x, point1.y - point2.y);
 
@@ -412,25 +412,39 @@ const SignLanguageGame: React.FC = () => {
     <div className="flex h-screen ml-60 mt-14 bg-gray-100">
       {/* Sidebar */}
       <Sidebar />
-  
+
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Navbar */}
         <Navbar />
-  
+
         {/* Loading Screen */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center h-full bg-cyan-950">
-            <img src="/assets/handscan.jpg" alt="Hand Scan" className=" w-full h-3/4 mb-8" />
+            <h1 className="text-white text-3xl font-bold mb-6">Sign Language Game</h1>
+            {/* Hướng dẫn tiếng Anh với giao diện được cải thiện */}
+            <div className="w-full max-w-2xl bg-blue-900/30 rounded-lg backdrop-blur-sm p-6 border border-blue-500/30">
+              <h3 className="text-2xl font-bold text-cyan-300 mb-4">How to Play</h3>
+              <ul className="list-disc pl-5 space-y-3 text-gray-100">
+                <li>Use your hand to form sign language letters shown on screen</li>
+                <li>Earn 1 point each time you correctly match the requested letter</li>
+                <li>You have 10 seconds to make the correct hand sign</li>
+                <li>The game will display random letters</li>
+                <li>Use your camera to detect your hand gestures</li>
+              </ul>
+
+
+            </div>
+
             <button
               onClick={startGame}
-              className="bg-cyan-600 text-white px-6 py-3 rounded-lg hover:bg-cyan-500 transition duration-300"
+              className="mt-8 bg-cyan-500 text-white px-8 py-3 rounded-lg hover:bg-cyan-400 transition duration-300 font-bold shadow-lg shadow-cyan-900/50"
             >
               Let's Play
             </button>
           </div>
         )}
-  
+
         {/* Game Interface */}
         {!isLoading && (
           <div className="ml-10 mt-5 flex flex-grow">
@@ -455,7 +469,7 @@ const SignLanguageGame: React.FC = () => {
                 Detected Letter: <span className="font-bold text-blue-600">{detectedLetter}</span>
               </p>
             </div>
-  
+
             {/* Right Side: Game Interface */}
             <div className="w-1/2 p-4 bg-white">
               <h2 className="text-2xl font-bold text-blue-600 mb-4">Sign Language Game</h2>
@@ -469,20 +483,20 @@ const SignLanguageGame: React.FC = () => {
                 <p className="text-gray-700 mb-4">
                   Time Left: <span className="font-bold text-red-600">{timeLeft}</span> seconds
                 </p>
-  
+
                 {!isGameActive && (
                   <>
                     {timeLeft === 0 && (
                       <div className="mt-8 flex flex-col items-center justify-center text-center space-y-4">
-                      <p className="text-2xl font-bold text-red-600">Time's up! Game Over.</p>
-                      <p className="text-lg text-gray-800">Your score: <span className="text-blue-700 font-bold">{score}</span></p>
-                      <button
-                        onClick={startGame}
-                        className="bg-green-500 text-white text-lg px-8 py-3 rounded-xl hover:bg-green-400 transition duration-300 shadow-lg"
-                      >
-                        Play Again
-                      </button>
-                    </div>
+                        <p className="text-2xl font-bold text-red-600">Time's up! Game Over.</p>
+                        <p className="text-lg text-gray-800">Your score: <span className="text-blue-700 font-bold">{score}</span></p>
+                        <button
+                          onClick={startGame}
+                          className="bg-green-500 text-white text-lg px-8 py-3 rounded-xl hover:bg-green-400 transition duration-300 shadow-lg"
+                        >
+                          Play Again
+                        </button>
+                      </div>
                     )}
                   </>
                 )}
@@ -493,7 +507,7 @@ const SignLanguageGame: React.FC = () => {
       </div>
     </div>
   );
-  
+
 };
 
 export default SignLanguageGame;

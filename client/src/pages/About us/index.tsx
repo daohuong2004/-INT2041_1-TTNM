@@ -33,7 +33,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
 const teamMembers = [
   {
     name: "Nguyen Thu Ha",
-    role:"Member",
+    role: "Member",
     msv: "22028282",
     imageUrl: "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/28-School_Girl-128.png",
   },
@@ -47,9 +47,9 @@ const teamMembers = [
     name: "Le Minh Duong",
     role: "Member",
     msv: "22028283",
-    imageUrl: "https://www.iconfinder.com/icons/403022/business%20man_male_user_avatar_profile_person_man_icon",
+    imageUrl: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/boy-1024.png",
   },
-  
+
 ];
 
 function Aboutus(props: IProps) {
