@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 
 
-import {Accessibility, Gamepad, Book, Video, Award, Globe, ArrowRight, HandMetal, Braces } from "lucide-react";
+import { Accessibility, Gamepad, Book, Video, Award, Globe, ArrowRight, HandMetal, Braces } from "lucide-react";
 interface IProps {
   className?: string;
 }
@@ -31,12 +31,12 @@ function Landing(props: IProps) {
       className="w-full bg-indigo-700 p-2 shadow-lg fixed top-0 ml-0 z-10"
     >
       <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6">
-        
+
         <Link to="/" className="text-white text-3xl font-bold flex items-center gap-2">
-          <img className="w-10 object-cover" src={'/assets/logo.png'} alt="Sign Language" />
+          <img className="w-10 object-cover" src={'/assets/alternate_logo.png'} alt="Sign Language" />
           <span className="text-yellow-300">SignPal</span>
         </Link>
-        
+
         <ul className="flex space-x-6">
           <li>
             <Link to="/" className="text-white hover:text-yellow-300 flex items-center gap-1 transition duration-300">
@@ -44,7 +44,7 @@ function Landing(props: IProps) {
               <span>Home</span>
             </Link>
           </li>
-          
+
           <li>
             <Link to="/login" className="bg-yellow-400 text-indigo-800 px-4 py-2 rounded-md hover:bg-yellow-300 transition duration-300 font-medium">
               Log In
@@ -56,24 +56,24 @@ function Landing(props: IProps) {
             </Link>
           </li>
         </ul>
-        
-      
+
+
       </div>
     </motion.nav>
   );
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-yellow-300 mt-4 p-10 scrollbar-hide overflow-auto">
-      
+
       <CustomNavbar />
       {/* Style to hide scrollbar */}
-      
+
 
       {/* Yellow border container - fixed size with scrollable content */}
       <div className="w-[4500px]  bg-yellow-300 p-4 rounded-2xl h-[90vh] flex flex-col">
-        
+
         {/* Main content with white background - scrollable with hidden scrollbar */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -83,22 +83,22 @@ function Landing(props: IProps) {
           {/* Hero Section */}
           <div className="flex pt-24">
             {/* Left content */}
-            <motion.div 
+            <motion.div
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
               className="w-1/2 pr-8"
             >
               <div className="relative mb-6">
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="w-16 h-16 bg-orange-500 rounded-full"
                 />
               </div>
-              
-              <motion.h1 
+
+              <motion.h1
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -106,8 +106,8 @@ function Landing(props: IProps) {
               >
                 Learn and Translate Languages for Everyone.
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -115,9 +115,9 @@ function Landing(props: IProps) {
               >
                 Accessible language learning and translation tools designed for people with disabilities. Empowering disabled individuals to connect, communicate, and explore new languages with ease.
               </motion.p>
-              
+
               <div className="flex space-x-4 mb-12">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ y: 20, opacity: 0 }}
@@ -130,8 +130,8 @@ function Landing(props: IProps) {
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </motion.button>
-                
-                <motion.button 
+
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ y: 20, opacity: 0 }}
@@ -146,17 +146,17 @@ function Landing(props: IProps) {
                 </motion.button>
               </div>
             </motion.div>
-            
+
             {/* Right side illustrations */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
               className="w-1/2 relative"
             >
               {/* Illustrations placeholder with animations */}
-              <motion.div 
-                animate={{ 
+              <motion.div
+                animate={{
                   y: [0, -15, 0],
                   transition: { duration: 3, repeat: Infinity, repeatType: "reverse" }
                 }}
@@ -166,8 +166,8 @@ function Landing(props: IProps) {
                   <img src="/assets/blind.jpg" alt="Person with smartphone" className="max-w-full" />
                 </div>
               </motion.div>
-              <motion.div 
-                animate={{ 
+              <motion.div
+                animate={{
                   y: [0, 15, 0],
                   transition: { duration: 4, repeat: Infinity, repeatType: "reverse" }
                 }}
@@ -177,9 +177,9 @@ function Landing(props: IProps) {
                   <img src="/assets/blind.jpg" alt="Person with object" className="max-w-full" />
                 </div>
               </motion.div>
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   x: [0, 10, 0],
                   transition: { duration: 5, repeat: Infinity, repeatType: "reverse" }
                 }}
@@ -189,9 +189,9 @@ function Landing(props: IProps) {
                   <img src="/assets/deaf.jpg" alt="Person with curly hair" className="max-w-full" />
                 </div>
               </motion.div>
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   scale: [1, 1.05, 1],
                   transition: { duration: 4, repeat: Infinity, repeatType: "reverse" }
                 }}
@@ -201,25 +201,25 @@ function Landing(props: IProps) {
                   <img src="/assets/blindboy.jpg" alt="Person with helmet" className="max-w-full" />
                 </div>
               </motion.div>
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   rotate: [0, 45, 0],
                   transition: { duration: 8, repeat: Infinity, repeatType: "reverse" }
                 }}
                 className="absolute top-40 left-0 w-10 h-10 bg-blue-200 rounded-sm"
               />
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   scale: [1, 1.2, 1],
                   transition: { duration: 3, repeat: Infinity, repeatType: "reverse" }
                 }}
                 className="absolute top-12 right-12 w-6 h-6 bg-yellow-400 rounded-full"
               />
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   y: [0, -10, 0],
                   transition: { duration: 5, repeat: Infinity, repeatType: "reverse" }
                 }}
@@ -229,20 +229,20 @@ function Landing(props: IProps) {
                   <img src="/assets/wheel.jpg" alt="Person looking at screen" className="max-w-full" />
                 </div>
               </motion.div>
-              
-              <motion.div 
-                animate={{ 
+
+              <motion.div
+                animate={{
                   y: [0, 10, 0],
                   transition: { duration: 4, repeat: Infinity, repeatType: "reverse" }
                 }}
                 className="absolute bottom-0 right-0 w-48 h-48 border-2 border-gray-200 rounded-full bg-white flex items-center justify-center"
               >
                 <div className="w-40 h-40 rounded-full overflow-hidden flex items-center justify-center">
-                    <img
-                      src="/assets/wheel.jpg"  // Replace with your actual image URL
-                      alt="Person holding object"
-                      className="w-full h-full object-cover"
-                    />
+                  <img
+                    src="/assets/wheel.jpg"  // Replace with your actual image URL
+                    alt="Person holding object"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </motion.div>
             </motion.div>
@@ -282,7 +282,7 @@ function Landing(props: IProps) {
                       Sign language games
                     </li>
                   </ul>
-                  
+
                   <Link
                     to="/login"
                     className="block w-full bg-indigo-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-indigo-700 transition duration-300 text-center group-hover:bg-indigo-500"
@@ -292,17 +292,17 @@ function Landing(props: IProps) {
                       <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Link>
-                  
+
                 </div>
               </div>
-              
-              
-              
+
+
+
             </div>
           </div>
-          
+
           {/* Find Mentor Section */}
-          <motion.div 
+          <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
@@ -310,11 +310,11 @@ function Landing(props: IProps) {
           >
             <h2 className="text-2xl font-bold mb-4">Find Your Right Mentor</h2>
             <p className="text-gray-600 mb-8">Stay connected with a monthly or yearly subscription.</p>
-            
+
             <div className="flex space-x-6">
               {/* Left illustration */}
               <div className="w-1/3 bg-white rounded-xl p-6 relative">
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="absolute top-6 right-6 bg-white rounded-md px-3 py-1 shadow-md flex items-center"
                 >
@@ -323,8 +323,8 @@ function Landing(props: IProps) {
                   </svg>
                   <span className="text-xs font-medium">Available Solutions</span>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="absolute top-20 left-0 bg-white rounded-e-md px-3 py-1 shadow-md"
                 >
@@ -336,16 +336,16 @@ function Landing(props: IProps) {
                   </div>
                   <p className="text-xs text-gray-500 mt-1">Available help even through video calls</p>
                 </motion.div>
-                
-                <motion.div 
-                  animate={{ 
+
+                <motion.div
+                  animate={{
                     y: [0, -5, 0],
                     transition: { duration: 3, repeat: Infinity, repeatType: "reverse" }
                   }}
                   className="mt-32 flex flex-col items-center"
                 >
-                 
-                  
+
+
                   <div className="bg-white rounded-lg shadow-lg p-4 relative mt-4 w-full">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
@@ -357,8 +357,8 @@ function Landing(props: IProps) {
                           <p className="text-xs text-gray-500">UX Trainer</p>
                         </div>
                       </div>
-                      
-                      <motion.button 
+
+                      <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center"
@@ -371,12 +371,12 @@ function Landing(props: IProps) {
                   </div>
                 </motion.div>
               </div>
-              
+
               {/* Right side info boxes */}
               <div className="w-2/3 space-y-6">
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.02 }}
-                  animate={{ 
+                  animate={{
                     x: [0, 5, 0],
                     transition: { duration: 6, repeat: Infinity, repeatType: "reverse" }
                   }}
@@ -392,10 +392,10 @@ function Landing(props: IProps) {
                     <p className="text-gray-600">We have the right mentors for any job, we will find you the right mentor and help you to connect with them easily.</p>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   whileHover={{ scale: 1.02 }}
-                  animate={{ 
+                  animate={{
                     x: [0, -5, 0],
                     transition: { duration: 5, repeat: Infinity, repeatType: "reverse" }
                   }}

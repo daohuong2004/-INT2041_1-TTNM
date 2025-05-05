@@ -25,10 +25,9 @@ const Feature: React.FC<FeatureProps> = ({
   return (
     <div
       className={`bg-white rounded-lg p-6 flex flex-col items-center justify-center w-[400px] h-[244px] cursor-pointer transition-all duration-300 ease-in-out transform 
-        ${
-          isHovered || isSelected
-            ? "scale-105 shadow-xl bg-gradient-to-t from-[#48C9B0] to-[#1F618D]"
-            : "hover:scale-105 hover:shadow-lg"
+        ${isHovered || isSelected
+          ? "bg-gradient-to-t from-[#48C9B0] to-[#1F618D]"
+          : "hover:bg-indigo-600 hover:text-white hover:shadow-xl"
         }`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -63,7 +62,7 @@ const features = [
     ),
     iconUrl: "/assets/video.png",
   },
-  
+
   {
     title: "Dictionary",
     content: (
@@ -89,8 +88,8 @@ const features = [
         <ul className="list-disc list-inside mb-2">
           <li>- <strong>Sign Game</strong>: use hand signs corresponding to the target alphabet letters in sign language.</li>
           <li>- <strong>Video Game</strong>: watch the sign language video displayed on the screen and choose the correct answer.</li>
-          
-          
+
+
         </ul>
         <p>
           <strong>Track Your Progress:</strong> Use the game to test and improve your knowledge.
@@ -132,7 +131,7 @@ const features = [
         <ul className="list-disc list-inside mb-2">
           <li>- Drop, drag or delete tasks in the "To Do", "In Progress","Complete" columns.</li>
           <li>- Add events to the calender.</li>
-        
+
         </ul>
         <p>
           <strong>Track your progress: </strong> Plan your day, make goals, and stay on top of your tasks
@@ -161,7 +160,8 @@ function HowToUse(props: IProps) {
         <h1 className="text-5xl font-extrabold mb-6 text-blue-600">How to use</h1>
         <hr className="mb-6 border-gray-300" />
         <p className="mb-12 text-lg">
-          Welcome to our app! Here's a  <span className="text-blue-600">step-by-step </span>guide to help you make the most of its features:
+          Welcome to our website! This is an amazing tool for everyone to learn about Sign Language and want to improve skills. We offer a lot of helpful things, hope you like it.
+          Here's a  <span className="text-blue-600">step-by-step </span>guide to help you make the most of its features:
         </p>
         <div className="container mx-auto flex flex-wrap justify-center gap-10">
           {features.map((feature, index) => (

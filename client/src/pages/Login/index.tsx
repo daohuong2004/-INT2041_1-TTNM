@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
 
 interface IProps {
   className?: string;
 }
 
 function Login(props: IProps) {
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
 
   const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev); 
+    setShowPassword((prev) => !prev);
   };
 
   const handleSignUpClick = () => {
@@ -24,7 +24,7 @@ function Login(props: IProps) {
     <section className={`login flex flex-col bg-white overflow-hidden ${props.className || ''}`}>
       <div className="xs:mt-[22px] xs:mr-0 xs:mb-20 xs:ml-[13px] tn:mt-[22px] tn:mx-auto tn:mb-[50px] w-full flex flex-col gap-y-[50px] mt-[22px] mb-[91px] ml-[13px]">
         <div className="tn:gap-x-2 flex gap-x-3 z-[1]">
-          <img className="w-10 object-contain" src={'/assets/logo.png'} alt="alt text" />
+          <img className="w-10 object-contain" src={'/assets/alternate_logo.png'} alt="alt text" />
           <p className="md:items-start mt-1 mb-[3px]">
             <span className="font-extrabold text-[26px] leading-[1.26] font-PlusJakartaSans text-black md:text-[24px] xxs:text-[22px]">
               <span className="font-extrabold text-[rgb(83, 91, 205)]">Sign</span>
@@ -44,7 +44,7 @@ function Login(props: IProps) {
 
             <div className="flex flex-col relative mt-[49px]">
               <div className="bg-white rounded outline outline-[rgb(121,116,126)] outline-1 outline-offset-[-1px] relative min-h-[56px]" />
-              
+
               <div className="w-[460px] flex flex-col gap-y-2 absolute left-3 top-[-8px]">
                 <div className="flex flex-col bg-white w-11 z-[1] max-w-[85%]">
                   <p className="flex justify-center font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(28,27,31)] text-center w-9 h-[18px] max-w-[85%] mx-1">
@@ -53,8 +53,8 @@ function Login(props: IProps) {
                 </div>
                 <input
                   type="email"
-                  placeholder="nguyenthuha@gmail.com"
-                  className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]" 
+                  placeholder="Enter your email"
+                  className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]"
                 />
               </div>
             </div>
@@ -76,9 +76,9 @@ function Login(props: IProps) {
 
                 <div className="flex flex-col ml-1">
                   <input
-                    type={showPassword ? "text" : "password"} 
-                    placeholder="•••••••••••••••••••••••••"
-                    className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]" 
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]"
                   />
                 </div>
               </div>
@@ -101,17 +101,17 @@ function Login(props: IProps) {
             </div>
 
             <button className="flex justify-center font-bold text-[14px] leading-[1.28] font-PlusJakartaSans text-white text-center bg-[rgb(30,30,47)] rounded pt-[15px] pr-2 pb-[15px] pl-2 mt-10 cursor-pointer"
-            onClick={handleLoginClick} >
+              onClick={handleLoginClick} >
               Login
             </button>
             <div className="flex justify-center mt-4 mx-auto">
               <span className="font-bold text-[14px] leading-[1.28] font-PlusJakartaSans text-black text-center">
                 <span className="font-bold text-[rgb(48,48,48)]">Don’t have an account? </span>
                 <span
-            className="font-bold text-[rgb(255,134,130)] cursor-pointer"
-            onClick={handleSignUpClick} 
-          >
-            Sign up</span>
+                  className="font-bold text-[rgb(255,134,130)] cursor-pointer"
+                  onClick={handleSignUpClick}
+                >
+                  Sign up</span>
               </span>
             </div>
 

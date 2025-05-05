@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className={`bg-indigo-700 h-full fixed top-0 left-0 z-50 transition-all ${isSidebarOpen ? 'w-64' : 'w-16'}`}>
       <div className="p-3 flex items-center">
-        <img src="/assets/logo.png" alt="Logo" className="h-8 w-8" />
+        <img src="/assets/alternate_logo.png" alt="Logo" className="h-8 w-8" />
         {isSidebarOpen && (
           <Link to="/" className="text-yellow-300 text-3xl font-bold flex items-center gap-2 hover:text-yellow-300 transition-colors">
             SignPal
@@ -91,26 +91,26 @@ const Sidebar: React.FC = () => {
             className="group text-white flex items-center gap-3 px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 ease-in-out"
           >
             <UserCheck2Icon size={20} />
-            {isSidebarOpen && <span className="text-lg">Sign Language</span>}
+            {isSidebarOpen && <span className="text-lg">Sign Languages Translator</span>}
           </Link>
         </li>
 
         {/* Game with dropdown */}
         <li>
-        <button
-          onClick={toggleGamificationDropdown}
-          className="group text-white flex items-center justify-between px-4 py-2 w-full rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 ease-in-out text-left"
-        >
-        <div className="flex items-center gap-4">
-          <Award size={22} />
-          {isSidebarOpen && <span className="text-lg">Game</span>}
-        </div>
+          <button
+            onClick={toggleGamificationDropdown}
+            className="group text-white flex items-center justify-between px-4 py-2 w-full rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 ease-in-out text-left"
+          >
+            <div className="flex items-center gap-4">
+              <Award size={22} />
+              {isSidebarOpen && <span className="text-lg">Game</span>}
+            </div>
             {isGamificationOpen ? (
-           <ChevronUp size={22} />
-        ) : (
-          <ChevronDown size={22} />
-        )}
-        </button>
+              <ChevronUp size={22} />
+            ) : (
+              <ChevronDown size={22} />
+            )}
+          </button>
 
 
           {isGamificationOpen && (

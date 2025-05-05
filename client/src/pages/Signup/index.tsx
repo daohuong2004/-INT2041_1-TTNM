@@ -44,7 +44,7 @@ const Signup: React.FC<IProps> = (props) => {
     <section className={`signup flex flex-col bg-white overflow-hidden ${props.className || ''}`}>
       <div className="xs:mt-[46px] xs:mx-auto xs:mb-20 tn:mt-[46px] tn:mx-auto tn:mb-[50px] w-full flex flex-col gap-y-[18px] mt-[46px] mb-[104px]">
         <div className="tn:gap-x-2 w-[234px] flex gap-x-3 z-[1] max-w-[85%] ml-auto mr-10">
-          <img className="w-10 object-cover" src={'/assets/logo.png'} alt="Sign Language" />
+          <img className="w-10 object-cover" src={'/assets/alternate_logo.png'} alt="Sign Language" />
           <p className="md:items-start mt-1 mb-[3px]">
             <span className="font-extrabold text-[26px] leading-[1.26] font-PlusJakartaSans text-black md:text-[24px] xxs:text-[22px]">
               <span className="font-extrabold text-[rgb(83, 91, 205)]]">Sign</span>
@@ -71,7 +71,7 @@ const Signup: React.FC<IProps> = (props) => {
             <form className="w-full flex flex-col gap-y-6 mt-12" onSubmit={handleSubmit}>
               <div className="xs:gap-x-4 xxs:grid-cols-[repeat(1,_minmax(0,_1fr))] grid grid-cols-[repeat(2,_minmax(0,_1fr))] content-start gap-y-6 gap-x-6">
                 {/* Input Fields */}
-                {[ 
+                {[
                   { label: 'First Name', name: 'firstName', type: 'text' },
                   { label: 'Last Name', name: 'lastName', type: 'text' },
                   { label: 'Email', name: 'email', type: 'email' },
