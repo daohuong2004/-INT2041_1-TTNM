@@ -7,6 +7,9 @@ interface IProps {
 
 function Login(props: IProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const history = useHistory();
 
   const togglePasswordVisibility = () => {
@@ -19,142 +22,181 @@ function Login(props: IProps) {
 
   const handleLoginClick = () => {
     history.push('/dashboard');
-  }
+  };
+
   return (
-    <section className={`login flex flex-col bg-white overflow-hidden ${props.className || ''}`}>
-      <div className="xs:mt-[22px] xs:mr-0 xs:mb-20 xs:ml-[13px] tn:mt-[22px] tn:mx-auto tn:mb-[50px] w-full flex flex-col gap-y-[50px] mt-[22px] mb-[91px] ml-[13px]">
-        <div className="tn:gap-x-2 flex gap-x-3 z-[1]">
-          <img className="w-10 object-contain" src={'/assets/alternate_logo.png'} alt="alt text" />
-          <p className="md:items-start mt-1 mb-[3px]">
-            <span className="font-extrabold text-[26px] leading-[1.26] font-PlusJakartaSans text-black md:text-[24px] xxs:text-[22px]">
-              <span className="font-extrabold text-[rgb(83, 91, 205)]">Sign</span>
-              <span className="font-extrabold text-[rgb(160, 150, 18)]">Pal</span>
-            </span>
-          </p>
-        </div>
+    <div className="min-h-screen flex bg-gray-50">
+      {/* Left side - Login Form */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8">
+        <div className="w-full max-w-md">
+          {/* Logo */}
+          <div className="flex items-center mb-10">
+            <img className="w-12 h-12" src={'/assets/alternate_logo.png'} alt="SignPal Logo" />
+            <h1 className="ml-3 text-3xl font-bold">
+              <span className="text-[#535BCD]">Sign</span>
+              <span className="text-[#A09612]">Pal</span>
+            </h1>
+          </div>
 
-        <div className="md:flex-col md:items-center md:gap-y-[30px] w-[93.16%] flex justify-center gap-5">
-          <div className="md:w-full md:min-w-[unset] md:m-0 w-[512px] flex flex-col z-[1] min-w-0 mt-[92px] mb-[134px] mr-10">
-            <p className="md:text-[36px] md:items-start xxs:text-[32px] font-bold text-[40px] leading-tight font-PlusJakartaSans text-[rgb(30,30,47)]">
-              Login
-            </p>
-            <p className="font-normal text-[16px] leading-tight font-PlusJakartaSans text-[rgb(49,49,49)] opacity-[0.75] mt-4">
-              Login to access your account
-            </p>
+          {/* Login Header */}
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
+            <p className="mt-2 text-gray-600">Login to access your account</p>
+          </div>
 
-            <div className="flex flex-col relative mt-[49px]">
-              <div className="bg-white rounded outline outline-[rgb(121,116,126)] outline-1 outline-offset-[-1px] relative min-h-[56px]" />
-
-              <div className="w-[460px] flex flex-col gap-y-2 absolute left-3 top-[-8px]">
-                <div className="flex flex-col bg-white w-11 z-[1] max-w-[85%]">
-                  <p className="flex justify-center font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(28,27,31)] text-center w-9 h-[18px] max-w-[85%] mx-1">
-                    Email
-                  </p>
-                </div>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col bg-white rounded outline outline-[rgb(121,116,126)] outline-1 outline-offset-[-1px] relative mt-6">
-              <img
-                onClick={togglePasswordVisibility} // Add onClick event to toggle password visibility
-                className="w-12 object-cover relative mt-1 mb-1 ml-auto cursor-pointer"
-                src={'/assets/d483db8daa47f60f8b8df3a652230b66.svg'}
-                alt="Show/Hide Password"
-              />
-
-              <div className="w-[460px] flex flex-col gap-y-2 absolute left-3 top-[-8px]">
-                <div className="flex flex-col bg-white w-[73px] z-[1] max-w-[85%]">
-                  <div className="flex justify-center font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(49,49,49)] text-center w-[89.04%] h-[18px] mx-1">
-                    Password
-                  </div>
-                </div>
-
-                <div className="flex flex-col ml-1">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                    className="w-full h-full outline-none px-100 py-100 text-[16px] leading-tight font-PlusJakartaSans text-[rgb(28,27,31)]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="xs:mt-6 xs:mr-4 xs:mb-0 xs:ml-0 tn:mt-6 tn:mr-2 tn:mb-0 tn:ml-0 tn:flex-col tn:items-center tn:gap-y-[30px] tn:gap-x-2 flex justify-between gap-x-2.5 mt-6 mr-[17px]">
-              <div className="tn:w-full tn:min-w-[unset] w-[130px] flex gap-x-2 min-w-0">
-                <img className="w-6 object-cover" src={'/assets/525d0c0c6632a39f58c993f9839ebab6.svg'} alt="alt text" />
-                <p className="font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(49,49,49)] my-[3px]">
-                  Remember me
-                </p>
-              </div>
-
-              <button
-                className="tn:w-full tn:m-0 flex justify-end font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(255,134,130)] text-right my-[3px]"
-                onClick={() => history.push('/forgot-password')}
+          {/* Login Form */}
+          <div className="space-y-6">
+            {/* Email Field */}
+            <div className="relative">
+              <label
+                htmlFor="email"
+                className="absolute -top-2.5 left-3 bg-white px-1 text-sm text-gray-600"
               >
-                Forgot Password
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              />
+            </div>
+
+            {/* Password Field */}
+            <div className="relative">
+              <label
+                htmlFor="password"
+                className="absolute -top-2.5 left-3 bg-white px-1 text-sm text-gray-600"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-3 top-3"
+              >
+                {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clipRule="evenodd" />
+                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                  </svg>
+                )}
               </button>
             </div>
 
-            <button className="flex justify-center font-bold text-[14px] leading-[1.28] font-PlusJakartaSans text-white text-center bg-[rgb(30,30,47)] rounded pt-[15px] pr-2 pb-[15px] pl-2 mt-10 cursor-pointer"
-              onClick={handleLoginClick} >
-              Login
-            </button>
-            <div className="flex justify-center mt-4 mx-auto">
-              <span className="font-bold text-[14px] leading-[1.28] font-PlusJakartaSans text-black text-center">
-                <span className="font-bold text-[rgb(48,48,48)]">Don’t have an account? </span>
-                <span
-                  className="font-bold text-[rgb(255,134,130)] cursor-pointer"
-                  onClick={handleSignUpClick}
-                >
-                  Sign up</span>
-              </span>
-            </div>
-
-            <div className="sm:flex-col sm:items-center sm:gap-y-[30px] flex gap-x-4 mt-10">
-              <hr
-                className="sm:w-full sm:m-0 bg-[rgb(49,49,49)] w-[199px] h-px opacity-[0.25] min-h-[1px] mt-[9px] mb-2"
-              />
-              <div className="sm:w-full font-normal text-[14px] leading-[1.28] font-PlusJakartaSans text-[rgb(49,49,49)] opacity-[0.5]">
-                Or login with
+            {/* Remember me & Forgot Password */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={() => setRememberMe(!rememberMe)}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                  Remember me
+                </label>
               </div>
-              <hr
-                className="sm:w-full sm:m-0 bg-[rgb(49,49,49)] w-[198px] h-px opacity-[0.25] min-h-[1px] mt-[9px] mb-2"
-              />
+
+              <button
+                type="button"
+                onClick={() => history.push('/forgot-password')}
+                className="text-sm font-medium text-[#FF8682] hover:text-[#ff6c66] transition-colors"
+              >
+                Forgot Password?
+              </button>
             </div>
 
-            <div className="tn:flex-col tn:items-center tn:gap-y-[30px] tn:gap-x-2 flex gap-x-4 mt-10">
-              {/* Social media login options */}
-              <img
-                className="tn:w-full tn:min-w-[unset] tn:max-w-[160px] rounded outline outline-[rgb(81,93,239)] outline-1 outline-offset-[-1px] w-40 object-cover min-w-0"
-                src={'/assets/de9f3005456292fe90e42f79e20e10dc.svg'}
-                alt="alt text"
-              />
-              <img
-                className="tn:w-full tn:min-w-[unset] tn:max-w-[160px] rounded outline outline-[rgb(81,93,239)] outline-1 outline-offset-[-1px] w-40 object-cover min-w-0"
-                src={'/assets/1e58727831e4d8eac8c2399d37191fbc.svg'}
-                alt="alt text"
-              />
-              <img
-                className="tn:w-full tn:min-w-[unset] tn:max-w-[160px] rounded outline outline-[rgb(81,93,239)] outline-1 outline-offset-[-1px] w-40 object-cover min-w-0"
-                src={'/assets/28d74fcb9395a994ef47ddfa4d563aeb.svg'}
-                alt="alt text"
-              />
+            {/* Login Button */}
+            <div>
+              <button
+                type="submit"
+                onClick={handleLoginClick}
+                className="w-full bg-[#1E1E2F] text-white py-3 rounded-md hover:bg-[#2a2a42] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Login
+              </button>
+            </div>
+
+            {/* Sign Up Link */}
+            <div className="text-center">
+              <p className="text-sm text-gray-700">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  onClick={handleSignUpClick}
+                  className="font-medium text-[#FF8682] hover:text-[#ff6c66] transition-colors"
+                >
+                  Sign up
+                </button>
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-gray-50 px-4 text-sm text-gray-500">Or login with</span>
+              </div>
+            </div>
+
+            {/* Social Login */}
+            <div className="grid grid-cols-3 gap-4">
+              <button className="flex items-center justify-center py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <img
+                  className="h-6"
+                  src="https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_google-1024.png"
+                  alt="Google"
+                />
+              </button>
+              <button className="flex items-center justify-center py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <img
+                  className="h-6"
+                  src="https://cdn1.iconfinder.com/data/icons/social-media-2285/512/Colored_Facebook3_svg-1024.png"
+                  alt="Facebook"
+                />
+              </button>
+              <button className="flex items-center justify-center py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <img
+                  className="h-6"
+                  src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/apple-1024.png"
+                  alt="Apple"
+                />
+              </button>
             </div>
           </div>
+        </div>
+      </div>
 
+      {/* Right side - Image */}
+      <div className="hidden lg:block lg:w-1/2">
+        <div className="h-full flex items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-50">
           <img
-            className="md:w-full md:min-w-[unset] md:max-w-[563px] w-[563px] object-cover min-w-0 ml-10"
-            src={'/assets/fbbd5af3dcd1a864ccd3cfdf2a8a8082.png'}
-            alt="alt text"
+            src="/assets/fbbd5af3dcd1a864ccd3cfdf2a8a8082.png"
+            alt="Login illustration"
+            className="max-w-lg"
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

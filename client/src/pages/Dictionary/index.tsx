@@ -142,7 +142,7 @@ function Dictionary(props: IProps) {
   const renderVideo = (url: string) => {
     if (videoErrors[url]) {
       console.log(`Video error for URL: ${url}`);
-      return null; 
+      return null;
     }
 
     if (url.includes("youtube.com") || url.includes("youtu.be")) {
@@ -159,7 +159,7 @@ function Dictionary(props: IProps) {
             allowFullScreen
             style={{ pointerEvents: 'auto' }}
             onError={() => handleVideoError(url)}
-            title={`YouTube video player - ${videoId}`} 
+            title={`YouTube video player - ${videoId}`}
           ></iframe>
         );
       }
@@ -179,42 +179,42 @@ function Dictionary(props: IProps) {
 
   return (
     <Layout>
-        <div>
-          <h1 className="text-5xl font-extrabold mb-6 text-blue-600">Dictionary</h1>
-          <hr className="mb-6 border-gray-300" />
-          <p className="mb-4 text-lg">Easily look up words and phrases in sign language.</p>
-          <p className="mb-4 text-lg">View corresponding videos that show the signs for searched terms.</p>
-          <p className="mb-4 text-lg">Provides resources for individuals in the deaf and mute community and those looking to enhance their sign language skills.</p>
-          <p className="mb-12 text-lg">Hopefully these videos will help you learn and use sign language better.</p>
-          <hr className="mb-6 border-gray-300" />
-          <div className="relative mb-6">
-            <SearchBar
-              query={query}
-              onInputChange={handleInputChange}
-              onKeyPress={handleKeyPress}
-              suggestions={suggestions}
-              onSuggestionClick={handleSuggestionClick}
-            />
-          </div>
-
-          {notFound ? (
-            <p className="text-lg text-red-500">No results found for "{query}". Please try another term.</p>
-          ) : selectedGloss ? (
-            <div className="mt-6">
-              <h2 className="text-2xl font-bold mb-4">{selectedGloss.gloss}</h2>
-              {loadError && <p className="text-red-500">{loadError}</p>}
-              <div className="grid grid-cols-2 gap-3">
-                {selectedGloss.instances
-                  .filter(instance => !videoErrors[instance.url]) 
-                  .map(instance => (
-                    <div key={instance.instance_id} className="flex justify-center">
-                      {renderVideo(instance.url)}
-                    </div>
-                  ))}
-              </div>
-            </div>
-          ) : null}
+      <div>
+        <h1 className="text-5xl font-extrabold mb-6 text-blue-600">Dictionary</h1>
+        <hr className="mb-6 border-gray-300" />
+        <p className="mb-4 text-lg">Easily look up words and phrases in sign language.</p>
+        <p className="mb-4 text-lg">View corresponding videos that show the signs for searched terms.</p>
+        <p className="mb-4 text-lg">Provides resources for individuals in the deaf and mute community and those looking to enhance their sign language skills.</p>
+        <p className="mb-12 text-lg">Hopefully these videos will help you learn and use sign language better.</p>
+        <hr className="mb-6 border-gray-300" />
+        <div className="relative mb-6">
+          <SearchBar
+            query={query}
+            onInputChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            suggestions={suggestions}
+            onSuggestionClick={handleSuggestionClick}
+          />
         </div>
+
+        {notFound ? (
+          <p className="text-lg text-red-500">No results found for "{query}". Please try another term.</p>
+        ) : selectedGloss ? (
+          <div className="mt-6">
+            <h2 className="text-2xl font-bold mb-4">{selectedGloss.gloss}</h2>
+            {loadError && <p className="text-red-500">{loadError}</p>}
+            <div className="grid grid-cols-2 gap-3">
+              {selectedGloss.instances
+                .filter(instance => !videoErrors[instance.url])
+                .map(instance => (
+                  <div key={instance.instance_id} className="flex justify-center">
+                    {renderVideo(instance.url)}
+                  </div>
+                ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
     </Layout>
   );
 }
