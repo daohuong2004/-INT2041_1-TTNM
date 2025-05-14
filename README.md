@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # README - Ứng dụng SignPal	
 
 ## Giới thiệu
